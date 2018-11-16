@@ -24,7 +24,7 @@ def hypothesis(w, X):
     return np.dot(X, w.T)
 
 
-def minimize(w, X, t):
+def fit(w, X, t):
     rate = 0.06
     for i in range(80000):
         y = hypothesis(w, X)
@@ -35,7 +35,7 @@ def minimize(w, X, t):
 
 
 w_init = np.zeros(train_x.shape[1])
-W = minimize(w_init, train_x, train_t)
+W = fit(w_init, train_x, train_t)
 print(W)
 
 test = np.hstack((test, test**2))
