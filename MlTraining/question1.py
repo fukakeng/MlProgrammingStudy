@@ -24,12 +24,15 @@ def hypothesis(w, X):
     return np.dot(X, w.T)
 
 
+def dcost_function(w, X, t):
+    y = hypothesis(w, X)
+    return 2 * np.dot((y - t), X) / X.shape[0]
+
+
 def fit(w, X, t):
     rate = 0.06
     for i in range(80000):
-        y = hypothesis(w, X)
-        for n in range(X.shape[1]):
-            w[n] = w[n] - rate * np.mean(2 * (y - t) * X[:, n])
+        w = w - rate * dcost_function(w, X, t)
         print(f'iteration: {i},  error: {np.mean((hypothesis(w, X) - t) ** 2)}')
     return w
 
